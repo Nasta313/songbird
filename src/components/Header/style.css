@@ -1,0 +1,7 @@
+.header{
+    grid-area: header;
+    background-color: #303030;
+    border: 1px solid #444444;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
