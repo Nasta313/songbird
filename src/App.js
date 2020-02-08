@@ -6,11 +6,12 @@ import Question from './components/Question';
 import Answers from './components/Answers';
 import Description from './components/Description';
 import Button from './components/Button';
+//import data from './data';
 
 function App() {
     return (
         <div className = "app-container">
-            <Header/>
+            <Header activeTab = '1'/>
             <Question/>
             <Answers/>
             <Description/>

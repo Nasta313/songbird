@@ -1,17 +1,14 @@
 import React from 'react';
 import './style.css';
-import img from './../../images/problem.png'
+import Image from './../Image';
+import Audio from './../Audio';
 
 function Question() {
   return (
-    <div className = "question">
-      <div className = "question__info">
-        <img className = "question__image" src={img} alt="bird"/>
-        <span className = "questio__name">******</span>
-      </div>
-      <audio src="#"></audio>
-       
-        Когда игрок выбирает правильный ответ, в блоке с вопросом отображаются название и изображение птицы, голос которой звучвл.
+    <div className = 'question'>
+      <Image className='question__image'/>
+      <span className = 'question__name'>******</span>
+      <Audio/>
     </div>
   );
 }

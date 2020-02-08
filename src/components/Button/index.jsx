@@ -3,7 +3,7 @@ import './style.css';
 
 function Button() {
   return (
-    <div className = "app-button"> Next question </div>
+    <div className = "button"> Next question </div>
   );
 }
 

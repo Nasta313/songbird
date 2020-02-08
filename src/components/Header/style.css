@@ -2,17 +2,12 @@
     grid-area: header;
     background-color: #303030;
     border: 1px solid #444444;
-    padding: 1rem;
+    padding: 0 1rem;
     border-radius: 0.5rem;
 }
 
 .header-top{
     display: flex;
     justify-content: space-between;
-}
-
-.logo{
-    width: 100px;
-    display: block;
 }
 

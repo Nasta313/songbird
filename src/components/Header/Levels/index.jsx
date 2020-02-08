@@ -1,17 +1,18 @@
 import React from 'react';
 import "./style.css";
+import LevelItem from './LevelItem';
 
 function Levels() {
   return (
-    <ul className="levels-list">
-        <li className="list-item">1 qwerty</li>
-        <li className="list-item">2  qwerty</li>
-        <li className="list-item">3  qwerty</li>
-        <li className="list-item">4  qwerty</li>
-        <li className="list-item">5  qwerty</li>
-        <li className="list-item">6  qwerty</li>
+  <ul className="levels-list">
+      <LevelItem isActive/>
+      <LevelItem/>
+      <LevelItem/>
+      <LevelItem/>
+      <LevelItem/>
+      <LevelItem/>
     </ul>
-  );
+  )
 }
 
 export default Levels;

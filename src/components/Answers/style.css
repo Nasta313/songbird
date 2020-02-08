@@ -2,6 +2,11 @@
     grid-area: answers;
     background-color: #303030;
     border: 1px solid #444444;
-    padding: 1rem;
     border-radius: 0.5rem;
+    padding: 1rem;
+}
+.answers__list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }

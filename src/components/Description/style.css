@@ -4,4 +4,24 @@
     border: 1px solid #444444;
     padding: 1rem;
     border-radius: 0.5rem;
+    display: grid;
+    align-items: top;
+    grid-template-rows: 2fr 1fr auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'image name'
+                         'audio audio'
+                         'info info';
+}
+.description__image{
+    grid-area: image;
+}
+.description__name{
+    grid-area: name;
+    align-self: center;
+    text-align: center;
+    padding: 1rem;
+}
+.description__text{
+    grid-area: info;
+    align-items: center;
 }

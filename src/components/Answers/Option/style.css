@@ -1,0 +1,19 @@
+.answers__option{
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #444444;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.answers__flag{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #444444;
+}
+
+.answers__option-name{
+    margin-left: 1rem;
+}

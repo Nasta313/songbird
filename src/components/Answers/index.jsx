@@ -1,10 +1,18 @@
 import React from 'react';
 import './style.css';
+import Option from './Option';
 
 function Answers() {
   return (
     <div className = "answers">
-        блок с вариантами ответов содержит список с названиями шести разных птиц.
+      <ul className = "answers__list">
+          <Option/>
+          <Option/>
+          <Option/>
+          <Option/>
+          <Option/>
+          <Option/>
+      </ul>
     </div>
   );
 }
