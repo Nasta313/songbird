@@ -1,11 +1,10 @@
 import React from 'react';
-import './style.css';
 
-function Audio() {
+
+function Audio(props) {
+  const auto = props.auto;
   return (
-    
-      <audio className = "question__audio" controls src="/media/examples/t-rex-roar.mp3"></audio>
-   
+    <audio autoPlay = {auto} src="https://www.xeno-canto.org/sounds/uploaded/CXFHOPIVAS/XC503224-191020_0134.mp3"></audio>
   );
 }
 

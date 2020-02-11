@@ -1,11 +1,14 @@
 import React from 'react';
 import "./style.css";
 
-function Score() {
+function Score(props) {
+
+  const currentScore = props.currentScore;
+
   return (
-    <div className="score">
-        <span>Score: </span>
-        <span className="counter">0</span>
+    <div className = 'score'>
+        <span> Score: </span>
+        <span className = 'score__counter'>{ currentScore }</span>
     </div>
   );
 }

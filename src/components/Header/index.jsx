@@ -4,14 +4,18 @@ import Score from './Score';
 import Levels from './Levels';
 import Logo from './Logo';
 
-function Header() {
+function Header(props) {
+
+  const level = props.level;
+  const currentScore = props.currentScore;
+
   return (
-    <div className = "header">
-      <div className = "header-top">
+    <div className = 'header'>
+      <div className = 'header-top'>
         <Logo/>
-        <Score/>
+        <Score currentScore = { currentScore }/>
       </div>
-      <Levels/>
+      <Levels level = { level }/>
     </div>
   );
 }

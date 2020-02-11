@@ -1,11 +1,10 @@
 .question{
     grid-area: question;
-    background-color: #303030;
-    border: 1px solid #444444;
+    background-color: #3c4855;
     padding: 1rem;
     border-radius: 0.5rem;
     display: grid;
-    grid-template-rows: 2fr 1fr;
+    grid-template-rows: auto auto;
     grid-template-columns: 1fr 2fr;
     grid-template-areas: 'image name'
                          'audio audio';
@@ -18,5 +17,5 @@
 }
 .question__image{
     grid-area: image;
+    padding-bottom: 1rem;
 }
-
