@@ -4,19 +4,29 @@ import Option from './Option';
 import birdsData from './../../data/birdsData';
 
 function Answers(props) {
+  const items = props.currentState;
   const info = birdsData[props.level];
-
   const cb = props.cb;
-
+  
   return (
     <div className = "answers" >
       <ul className = "answers__list">
-          <Option name = {info[0].name} line ='0' cb = {cb}/>
-          <Option name = {info[1].name} line ='1' cb = {cb}/>
-          <Option name = {info[2].name} line ='2' cb = {cb}/>
-          <Option name = {info[3].name} line ='3' cb = {cb}/>
-          <Option name = {info[4].name} line ='4' cb = {cb}/>
-          <Option name = {info[5].name} line ='5' cb = {cb}/>
+      {
+        items.map( (item, index) => {
+          const style = {
+            backgroundColor: item
+          }
+          return (
+            <Option 
+              name = { info[index].name }
+              key = { info[index].id }
+              line = {'' + index} 
+              cb = {cb}
+              style = {style}
+            />
+          )
+        })
+      }
       </ul>
     </div>
   );

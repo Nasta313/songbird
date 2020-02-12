@@ -1,96 +1,103 @@
 import React from 'react';
-
 import './App.css';
 import Header from './components/Header';
 import Question from './components/Question';
 import Answers from './components/Answers';
 import Description from './components/Description';
 import Button from './components/Button';
-import voiseWrong from './data/correctAnswer.mp3';
-import voiseCorrect from './data/uncorrectAnswer.mp3';
+import birdsData from './data/birdsData';
+import voiseCorrect from './data/correctAnswer.mp3';
+import voiseWrong from './data/uncorrectAnswer.mp3';
+import voiseWin from './data/win.mp3';
+import getRandomInteger from './utils/getRandomInteger';
 
 class App extends React.Component {
-
     constructor(props){
         super(props);
-        this.dataLength = this.props.birdsData.length-1;
+        this.lastDataItem = birdsData.length-1;
         this.clickedItems = [];
-
+        this.firstStateOfItems = Array(birdsData.length).fill('grey');
         this.state = {
-            level: '0',
             currentScore: 0,
+            scoreIncrement: 5,
+            level: '0',
+            rightAnswer: String(getRandomInteger(0, this.lastDataItem)),
             chosenOption: null,
-            questionVisivility: false,
+            isAnswerVisible: false,
             isActiveButton: false,
-            rightAnswer: String(this.props.getRandomInteger(0, this.dataLength)),
-            increase: 5
+            stateOfItems: this.firstStateOfItems
         }
     }
-    
+   
     levelUp = () => {
         if ( this.state.isActiveButton ) {
             this.setState({
                 level: String(+this.state.level + 1),
-                rightAnswer: String(this.props.getRandomInteger(0, this.dataLength)),
+                rightAnswer: String(getRandomInteger(0, this.lastDataItem)),
             }, () => {
                 this.clickedItems = [];
-
                 this.setState({
                     chosenOption: null,
                     isActiveButton: false,
-                    questionVisibility: false,
-                    increase: 5
+                    isAnswerVisible: false,
+                    scoreIncrement: 5,
+                    stateOfItems: this.firstStateOfItems
                 })
             })
         }
-        
     }  
 
+    makeColored = (line, color) => {
+        const  newStateOfItems = this.state.stateOfItems.map(el => el);
+        newStateOfItems[line] = "red";
+        (color === 'red') ?  newStateOfItems[line] = "red" : newStateOfItems[line] = "green";
+        this.setState({
+            stateOfItems: newStateOfItems
+        })
+    }
+
     checkCorrectAnswer = (line) => { 
-        console.log('line', line);
-        console.log(this.clickedItems);
-        
         if ( this.state.chosenOption === this.state.rightAnswer) {
-            this.playAudio(voiseWrong);
+            this.playAudio(voiseCorrect);
+            this.makeColored(line, 'green');
             this.setState({
                 isActiveButton: true,
-                questionVisibility: true,
-                currentScore: this.state.currentScore + this.state.increase,
+                isAnswerVisible: true,
+                currentScore: this.state.currentScore + this.state.scoreIncrement,
             })
         } else {
-            this.playAudio(voiseCorrect);
+            this.playAudio(voiseWrong);
+            this.makeColored(line, 'red');
             this.setState({
-                increase: this.state.increase - 1,
-                
+                scoreIncrement: this.state.scoreIncrement - 1,
             })
         }
     }
 
     handleClick = ( line ) => {
-        this.setState({
+        this.setState({ 
             chosenOption: line,
         });
-
         if (!this.clickedItems.includes(line)){
-            this.clickedItems.push(line);
-            this.setState({
+            this.clickedItems.push(line); 
+            this.setState({ 
                 chosenOption: line,
             }, () => {
                 this.checkCorrectAnswer(line);
             })
         }
-        
     }
 
     updateApp = ( ) => {
         this.setState({
-            level: '0',
             currentScore: 0,
+            scoreIncrement: 5,
+            level: '0',
+            rightAnswer: String(getRandomInteger(0, this.lastDataItem)),
             chosenOption: null,
-            questionVisivility: false,
+            isAnswerVisible: false,
             isActiveButton: false,
-            rightAnswer: String(this.props.getRandomInteger(0, this.dataLength)),
-            increase: 5
+            stateOfItems: this.firstStateOfItems
         })
     }
   
@@ -99,10 +106,9 @@ class App extends React.Component {
         audio.play();
     }
 
-    render() { 
-      
-
-        if ( +this.state.level === 5) {
+    render() {
+        console.log( 'Правильный вариант:', +this.state.rightAnswer+1);
+        if ( +this.state.level === birdsData.length) {
             return (
                 <div className = 'app-container'>
                     <Header
@@ -120,7 +126,22 @@ class App extends React.Component {
                     />
                 </div>
             )
-        } else{
+        } else if (+this.state.currentScore === 30) {
+            return (
+                <div className = 'app-container'>
+                    <Header
+                        level = { this.state.level }
+                        currentScore = { this.state.currentScore }
+                    />
+                   <div>
+                        <h1>Поздравляем!</h1>
+                        <p>Ты прошел викторину и набрал максимальное количество баллав</p>
+                        <h2>Отличный результат</h2>
+                   </div>
+                   { this.playAudio(voiseWin)}
+                </div>
+            )
+        } else {
             return (
                 <div className = 'app-container'>
                     <Header
@@ -129,12 +150,13 @@ class App extends React.Component {
                     />
                     <Question
                         level = { this.state.level }
-                        visibility = { this.state.questionVisibility }
+                        visibility = { this.state.isAnswerVisible }
                         rightAnswer = { this.state.rightAnswer }
                     />
                     <Answers 
                         level = { this.state.level } 
                         cb = { this.handleClick }
+                        currentState = {this.state.stateOfItems}
                     />
                     <Description 
                         level = { this.state.level } 
